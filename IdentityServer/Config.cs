@@ -9,6 +9,8 @@ namespace IdentityServer
         {
             return new List<ApiResource>
             {
+                // 使用客户端证书保护API
+                new ApiResource("api1", "My API")
             };
         }
 
@@ -16,6 +18,23 @@ namespace IdentityServer
         {
             return new List<Client>
             {
+                // 使用客户端证书保护API
+                new Client
+                {
+                    ClientId = "client",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    // scopes that client has access to
+                    AllowedScopes = { "api1" }
+                }
             };
         }
 
