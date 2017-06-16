@@ -86,6 +86,34 @@ namespace IdentityServer
 
             app.UseIdentity();
 
+            // middleware for Google openid connect authentication
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                AuthenticationScheme = "Google",
+                DisplayName = "Google",
+                SignInScheme = "Identity.External",
+
+                ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com",
+                ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo"
+            });
+
+            // middleware for external openid connect authentication
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                SignInScheme = IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                SignOutScheme = IdentityServer4.IdentityServerConstants.SignoutScheme,
+
+                DisplayName = "OpenID Connect",
+                Authority = "https://demo.identityserver.io/",
+                ClientId = "implicit",
+
+                TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role"
+                }
+            });
+
             // Adds IdentityServer
             app.UseIdentityServer();
 
