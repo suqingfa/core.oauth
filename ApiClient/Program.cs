@@ -16,8 +16,13 @@ namespace ApiClient
                 var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
 
                 // request token
-                var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
-                var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+                // var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
+                // var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+
+                // 资源所有者密码
+                // request token
+                var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
+                var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("524246918@qq.com", "Admin12345.", "api1");
 
                 if (tokenResponse.IsError)
                 {

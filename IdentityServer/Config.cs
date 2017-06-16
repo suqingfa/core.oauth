@@ -34,7 +34,20 @@ namespace IdentityServer
 
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
-                }
+                },
+
+                // 资源所有者密码授予添加客户端
+                new Client
+                {
+                    ClientId = "ro.client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = { "api1" }
+                },
             };
         }
 
