@@ -262,3 +262,4 @@ __pycache__/
 /identityserver4-release
 **/wwwroot/lib
 **/Migrations
+**/tempkey.rsa
